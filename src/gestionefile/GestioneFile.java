@@ -16,7 +16,7 @@ public class GestioneFile {
         BufferedReader keyboard = new BufferedReader(input);
         
         //1)LETTURA
-        Lettore lettore = new Lettore("user.json");
+        Lettore lettore = new Lettore("output.csv");
         lettore.start();
         //2)ELABORAZIONE
         String nome = "";
