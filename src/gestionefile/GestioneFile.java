@@ -36,12 +36,11 @@ public class GestioneFile {
         catch(Exception e){
             System.out.println("Errore");
         }
-        
+        String testo = nome + ";" + pwd;
         //3) SCRITTURA
-        Scrittore scrittore = new Scrittore("output.csv", nome, pwd);
+        Scrittore scrittore = new Scrittore("output.csv", nome, pwd, testo);
         Thread threadScrittore = new Thread(scrittore);
         threadScrittore.start();
-        
     }
     
 }
