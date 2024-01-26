@@ -39,12 +39,11 @@ public class Scrittore implements Runnable{
      * Scrive un file di testo usando la classe BufferedWriter
      */
     public void scrivi(){
-        BufferedWriter br=null;
-        
-        try {
+  
+        try ( BufferedWriter br = new BufferedWriter(
+                    new FileWriter(nomeFile));){
             //1) apro il file
-            br = new BufferedWriter(
-                    new FileWriter(nomeFile));
+            
             //2) scrivo nel buffer
             br.write("File in output");
             br.write("\n\r");
@@ -53,28 +52,13 @@ public class Scrittore implements Runnable{
         } catch (IOException ex) {
             Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            if (br!=null)
-                try {
-                    //4)chiudo lo stream in uscita
-                    br.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
-        }
     }
     
     public void scriviUserPwd(String username, String pwd){
-        BufferedWriter br=null;
-        BufferedWriter brCopia=null;
         
-        try {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("output.csv"));BufferedWriter brCopia = new BufferedWriter(new FileWriter("copia.csv"))){
             //1) apro il file
-            br = new BufferedWriter(
-                    new FileWriter(nomeFile));
-            brCopia = new BufferedWriter(
-                    new FileWriter("copia.csv"));
+    
             //2) scrivo nel buffer
             br.write(username + ";" + pwd);
             br.write("\n\r");
@@ -82,20 +66,9 @@ public class Scrittore implements Runnable{
             brCopia.write("\n\r");
             //3) svuoto il buffer e salvo nel file i dati
             br.flush();  
-            brCopia.flush();
+            br.flush();
         } catch (IOException ex) {
             Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (br!=null || brCopia != null)
-                try {
-                    //4)chiudo lo stream in uscita
-                    br.close();
-                    brCopia.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Scrittore.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
         }
     }
 }

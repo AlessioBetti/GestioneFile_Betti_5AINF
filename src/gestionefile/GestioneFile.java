@@ -3,8 +3,8 @@ import java.io.*;
 
 /**
  *
- * @author MC
- * @version 12/01/23
+ * @author Alessio Betti
+ * @version 26/01/23
  */
 public class GestioneFile {
 
