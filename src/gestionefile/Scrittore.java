@@ -19,6 +19,12 @@ public class Scrittore implements Runnable{
     String pwd;
     String testoCopia;
     
+    /**
+     * 
+     * @param nomeFile
+     * 
+     */
+    
     public Scrittore(String nomeFile){
         this.nomeFile = nomeFile;
     }
@@ -30,6 +36,7 @@ public class Scrittore implements Runnable{
         this.pwd = pwd;
         this.testoCopia = testoCopia;
     }
+    
     
     @Override
     public void run() {

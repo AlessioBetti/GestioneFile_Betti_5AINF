@@ -17,6 +17,10 @@ public class GestioneFile {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader keyboard = new BufferedReader(input);
         
+        /**
+         * In quest oframmento di codice vengono instanziati i thread utili per popolare la 
+         * matrice di Vigenere ed anche l'oggetto della classe Matrice contenente il verme
+         */
         Matrice m = new Matrice("TPSIT");
         Vigenere v1 = new Vigenere(0, 12, 0, 12, m);
         Vigenere v2 = new Vigenere(13, 25, 0, 12, m);
@@ -61,8 +65,8 @@ public class GestioneFile {
         catch(Exception e){
             System.out.println("Errore");
         }
-        pwdCifrata = m.cifra(pwd);
-        String testo = nome + ";" + pwdCifrata;
+        //pwdCifrata = m.cifra(pwd);
+        String testo = nome + ";" + pwd;
         
  
         
@@ -70,7 +74,7 @@ public class GestioneFile {
         DataOutputStream outputStream2 = new DataOutputStream(new FileOutputStream("user.csv"));
         DataInputStream inputStream = new DataInputStream(new FileInputStream("user.json"));
         
-        outputStream.writeBytes("{\"Title\": \"Progetto GestioneFile\", \"Author\": \"Alessio Betti\", \"Classe\": \"5AINF\"}");
+        outputStream.writeBytes("{\"Title\": \"Progetto GestioneFile\", \"Author\": \"Alessio Betti\", \"Classe\": \"5AINF\", \"Version\": \"01/02/2024\"}");
         
         int count = inputStream.available();
         byte[] b = new byte[count];
@@ -79,15 +83,23 @@ public class GestioneFile {
         /*System.out.println("Contenuto del file \"user.json\"");
         for (byte i : b){
             System.out.print((char)i);
-        }
-        */
-        outputStream2.writeBytes("Title;Author;Class\n");
-        outputStream2.writeBytes("Progetto GestioneFile;Alessio Betti;5AINF\n");
+        }*/
+        
+        outputStream2.writeBytes("Title;Author;Class;Version\n");
+        outputStream2.writeBytes("Progetto GestioneFile;Alessio Betti;5AINF;01/02/2024\n");
+        
+        
+        
+        
+         
        
         //3) SCRITTURA
-        Scrittore scrittore = new Scrittore("output.csv", nome, pwdCifrata, testo);
+        Scrittore scrittore = new Scrittore("output.csv", nome, pwd, testo);
         Thread threadScrittore = new Thread(scrittore);
         threadScrittore.start();
+        
+        User user = new User("listaUser.csv", nome, pwd);
+       //user.scrivi(nome, pwd);
     }
     
 }
